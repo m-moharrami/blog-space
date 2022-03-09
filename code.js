@@ -1,4 +1,6 @@
 let postsArray = [];
+const titleInput = document.getElementById("post-title");
+const bodyInput = document.getElementById("post-body");
 
 function renderPosts() {
     let html = ""
@@ -10,7 +12,7 @@ function renderPosts() {
         `
     }
     document.getElementById("blog-list").innerHTML = html
-}
+};
 
 
 fetch("https://apis.scrimba.com/jsonplaceholder/posts")
@@ -26,8 +28,8 @@ article.title = '';
 
 document.getElementById("new-post").addEventListener('submit', function(event) {
     event.preventDefault();
-    const postTitle = document.getElementById("post-title").value;
-    const postBody = document.getElementById("post-body").value;
+    const postTitle = titleInput.value;
+    const postBody = bodyInput.value;
     const data = {
         title: postTitle,
         body: postBody
@@ -46,5 +48,7 @@ document.getElementById("new-post").addEventListener('submit', function(event) {
         .then(post => {
             postsArray.unshift(post);
             renderPosts();
+            titleInput.value = "";
+            bodyInput.value = "";
         })
-})
+});
